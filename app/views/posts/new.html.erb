@@ -1,0 +1,52 @@
+<div style=" background: linear-gradient(#00cc99, white, white)">
+  <div class="container">
+    <nav class="navbar navbar-light bg-light">
+        <img src="" width="30" height="30" class="d-inline-block align-top" alt="">
+      <h1>  InstaFood  </h1>
+      <h6 style="text-align:right"><a href='/logout'>Sign Out</a></h6>
+    </nav>
+    <div style="text-align:center" class="row">
+      <h3><%= current_user.user_name %>'s is about to Post!</h3>
+      <a href='/users/<%= current_user.id %>/posts'> Home |</a>
+      <a href='/users/<%= current_user.id %>/posts/show'> Post by me |</a>
+      <a href='/users/<%= current_user.id%>/posts/likes/show'> Post I liked </a>
+    </div>
+    <hr />
+    <% if flash[:errors] %>
+      <% flash[:errors].each do |error| %>
+      <p>
+        <%= error %>
+      </p>
+        <% end %>
+    <% end %>
+    <% if flash[:notice] %>
+      <p style="color:green"> <%= flash[:notice] %>  </p>
+    <% end %>
+    <div class="container">
+
+        <%= form_for (@post), url: post_path_create_url, html: { multipart: true } do |f| %>
+        <div id="formstyle">
+          <input type='hidden' name="post[user_id]"  value="<%=current_user.id %>">
+          <div >
+            <%= f.label :name %>
+            <%= f.text_field :name, class:"form-control" %>
+          </div>
+          <div >
+            <%= f.label :description %>
+            <%= f.text_area :description, class:"form-control" %>
+          </div>
+          <div >
+            <%= f.label :review %>
+            <%= f.text_area :review, class:"form-control"%>
+          </div>
+          <div >
+            <%= f.label :image %>
+            <%= f.file_field :image, class: "form-control-file"%>
+          </div>
+          <div id="button">
+              <%= f.submit 'Create Post!', class: "btn btn-primary" %>
+          </div>
+        </div>
+        <% end %>
+    </div>
+</div>
