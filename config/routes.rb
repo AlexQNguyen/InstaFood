@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'comments/index'
+
   get '/users/:user_id/posts' => 'posts#index'
   get '/users/:user_id/posts/show' => 'posts#show'
   get '/users/:user_id/posts/new' => 'posts#new'
