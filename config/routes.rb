@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'comments/index'
+  post '/users/:user_id/posts/:post_id/comments/index' => 'commets#create'
 
   get '/users/:user_id/posts' => 'posts#index'
   get '/users/:user_id/posts/show' => 'posts#show'
